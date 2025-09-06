@@ -12,7 +12,10 @@ ApnaMed Web is a comprehensive telemedicine platform that connects patients and 
 - **Video Consultations**: Connect with doctors via WebRTC video calls
 - **Health Records**: View personal medical history and vital signs
 - **Prescriptions**: Access prescriptions and find nearby pharmacies
-- **AI Symptom Checker**: OpenAI-powered symptom analysis and recommendations
+- **AI Symptom Checker**: Enhanced offline medical analysis with optional "Smarter Answers" online mode
+  - **Default Mode**: Advanced offline analysis using comprehensive medical database
+  - **Smarter Answers**: Optional online AI mode using OpenAI GPT for enhanced responses
+  - **Automatic Fallback**: Always works offline, even without internet connection
 - **Pharmacy Locator**: Find pharmacies with specific medicines
 
 ### For Doctors
@@ -96,19 +99,24 @@ The built files will be in the `build` directory.
 
 **Note**: The AI symptom checker works in two modes:
 
-#### Demo Mode (Default)
-- Works immediately without any configuration
-- Provides intelligent mock responses based on symptom keywords
-- Covers common symptoms like fever, headache, chest pain, etc.
-- Includes emergency symptom detection
+#### Enhanced Offline Mode (Default)
+- **No configuration required** - works immediately out of the box
+- Uses comprehensive medical database with 50+ symptoms and 15+ conditions
+- Advanced TensorFlow.js neural network for accurate symptom analysis
+- Provides detailed predictions with confidence scores (0-100%)
+- Includes ICD-10 codes, severity assessments, and treatment guidelines
+- Risk factor analysis and emergency symptom detection
+- Symptom pattern recognition and medical reasoning
+- Complete offline functionality - works without internet
 
-#### Real AI Mode (Optional)
+#### Smarter Answers Mode (Optional Online Enhancement)
 1. Get an API key from [OpenAI](https://openai.com)
-2. Create a `.env` file in the `web` directory:
+2. Create a `.env` file in the project root directory:
    ```
-   REACT_APP_OPENAI_API_KEY=your-actual-api-key-here
+   REACT_APP_OPENAI_API_KEY=your-openai-api-key-here
    ```
-3. Restart the development server
+3. Start the development server
+4. Toggle to "Smarter Answers" mode in the symptom checker for enhanced online AI analysis
 
 **Security Note**: In production, API keys should be handled by your backend server for security.
 
@@ -179,13 +187,15 @@ The application uses WebRTC for peer-to-peer video calling. No additional config
 - [ ] Access video consultation
 - [ ] View health records
 - [ ] Check prescriptions
-- [ ] Use symptom checker
+- [ ] Use enhanced offline symptom analyzer
+- [ ] Test "Smarter Answers" online mode (requires OpenAI key)
 
 #### Doctor Portal
 - [ ] Login with demo credentials
 - [ ] Access patient queue
-- [ ] Start video consultations
+- [ ] Start video consultations  
 - [ ] Search patient records
+- [ ] Review comprehensive medical analysis results
 - [ ] Add prescriptions
 
 #### Video Calling

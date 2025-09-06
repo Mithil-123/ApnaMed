@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { translateText, SUPPORTED_LANGUAGES, getLanguageName, getLanguageFlag } from '../services/translationService';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import {
+  translateText,
+  SUPPORTED_LANGUAGES,
+  getLanguageName,
+  getLanguageFlag,
+} from "../services/translationService";
 
 const TranslationContainer = styled.div`
   display: flex;
@@ -28,7 +33,7 @@ const LanguageSelector = styled.select`
   background-color: white;
   font-size: 14px;
   cursor: pointer;
-  
+
   &:focus {
     outline: none;
     border-color: #007bff;
@@ -47,11 +52,11 @@ const TranslateButton = styled.button`
   display: flex;
   align-items: center;
   gap: 5px;
-  
+
   &:hover {
     background-color: #0056b3;
   }
-  
+
   &:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
@@ -67,6 +72,10 @@ const TranslatedText = styled.div`
   line-height: 1.5;
   color: #495057;
   min-height: 40px;
+
+  /* Preserve line breaks and whitespace */
+  white-space: pre-wrap;
+  word-wrap: break-word;
 `;
 
 const LoadingSpinner = styled.div`
@@ -77,10 +86,14 @@ const LoadingSpinner = styled.div`
   border-top: 2px solid #007bff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  
+
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -91,8 +104,20 @@ const ErrorMessage = styled.div`
 `;
 
 /**
+ * Utility function to format text with proper line breaks
+ * Converts \n to <br /> for HTML rendering
+ */
+const formatTextWithLineBreaks = (text) => {
+  if (!text) return "";
+  return text
+    .replace(/\n/g, "<br />")
+    .replace(/\r\n/g, "<br />")
+    .replace(/\r/g, "<br />");
+};
+
+/**
  * Translation Widget Component
- * 
+ *
  * Provides translation functionality for text content
  * Features:
  * - Language selection dropdown
@@ -101,30 +126,41 @@ const ErrorMessage = styled.div`
  * - Loading states and error handling
  */
 const TranslationWidget = ({ text, onTranslationComplete }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
-  const [translatedText, setTranslatedText] = useState('');
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [translatedText, setTranslatedText] = useState("");
   const [isTranslating, setIsTranslating] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // Clear translated text when original text changes
   useEffect(() => {
-    setTranslatedText('');
-    setError('');
+    setTranslatedText("");
+    setError("");
   }, [text]);
 
   const handleTranslate = async () => {
     if (!text || !text.trim()) {
-      setError('No text to translate');
+      setError("No text to translate");
       return;
     }
 
     setIsTranslating(true);
-    setError('');
+    setError("");
 
     try {
-      const result = await translateText(text, selectedLanguage);
-      setTranslatedText(result);
-      
+      // Strip HTML tags from the original text for translation
+      const plainTextForTranslation = text
+        .replace(/<[^>]*>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      const result = await translateText(
+        plainTextForTranslation,
+        selectedLanguage,
+      );
+
+      // Apply line break formatting to the translated result
+      setTranslatedText(formatTextWithLineBreaks(result));
+
       // Notify parent component if callback provided
       if (onTranslationComplete) {
         onTranslationComplete(result, selectedLanguage);
@@ -138,8 +174,8 @@ const TranslationWidget = ({ text, onTranslationComplete }) => {
 
   const handleLanguageChange = (e) => {
     setSelectedLanguage(e.target.value);
-    setTranslatedText('');
-    setError('');
+    setTranslatedText("");
+    setError("");
   };
 
   return (
@@ -150,7 +186,7 @@ const TranslationWidget = ({ text, onTranslationComplete }) => {
           value={selectedLanguage}
           onChange={handleLanguageChange}
         >
-          {SUPPORTED_LANGUAGES.map(lang => (
+          {SUPPORTED_LANGUAGES.map((lang) => (
             <option key={lang.code} value={lang.code}>
               {lang.flag} {lang.name}
             </option>
@@ -166,26 +202,23 @@ const TranslationWidget = ({ text, onTranslationComplete }) => {
               Translating...
             </>
           ) : (
-            <>
-              🔄 Translate
-            </>
+            <>🔄 Translate</>
           )}
         </TranslateButton>
       </TranslationHeader>
-      
+
       {translatedText && (
         <TranslatedText>
-          <strong>{getLanguageFlag(selectedLanguage)} {getLanguageName(selectedLanguage)}:</strong>
+          <strong>
+            {getLanguageFlag(selectedLanguage)}{" "}
+            {getLanguageName(selectedLanguage)}:
+          </strong>
           <br />
-          {translatedText}
+          <div dangerouslySetInnerHTML={{ __html: translatedText }} />
         </TranslatedText>
       )}
-      
-      {error && (
-        <ErrorMessage>
-          ⚠️ {error}
-        </ErrorMessage>
-      )}
+
+      {error && <ErrorMessage>⚠️ {error}</ErrorMessage>}
     </TranslationContainer>
   );
 };

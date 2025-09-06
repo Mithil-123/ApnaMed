@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { FaSignOutAlt, FaUser } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { FaSignOutAlt, FaUser } from "react-icons/fa";
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: #E3F2FD;
+  background-color: #e3f2fd;
 `;
 
 const Header = styled.div`
-  background-color: #1976D2;
+  background-color: #1976d2;
   color: white;
   padding: 20px;
   display: flex;
@@ -35,7 +35,7 @@ const HeaderTitle = styled.h1`
 
 const HeaderSubtitle = styled.p`
   font-size: 14px;
-  color: #E3F2FD;
+  color: #e3f2fd;
 `;
 
 const LogoutButton = styled.button`
@@ -71,22 +71,22 @@ const CardsContainer = styled.div`
 
 const DashboardCard = styled.button`
   background-color: white;
-  border: 2px solid #2196F3;
+  border: 2px solid #2196f3;
   border-radius: 20px;
   padding: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    border-color: #1976D2;
+    border-color: #1976d2;
   }
-  
+
   &:focus {
-    outline: 3px solid #1976D2;
+    outline: 3px solid #1976d2;
     outline-offset: 2px;
   }
 `;
@@ -114,7 +114,7 @@ const CardIconSecondary = styled.div`
 const CardTitle = styled.h2`
   font-size: 18px;
   font-weight: bold;
-  color: #1976D2;
+  color: #1976d2;
   margin-bottom: 8px;
 `;
 
@@ -126,7 +126,7 @@ const CardDescription = styled.p`
 `;
 
 const CardBadge = styled.div`
-  background-color: #E3F2FD;
+  background-color: #e3f2fd;
   padding: 8px 12px;
   border-radius: 12px;
   display: inline-block;
@@ -134,7 +134,7 @@ const CardBadge = styled.div`
 
 const CardBadgeText = styled.span`
   font-size: 11px;
-  color: #1976D2;
+  color: #1976d2;
   font-weight: 600;
 `;
 
@@ -156,7 +156,7 @@ const StatCard = styled.div`
 const StatNumber = styled.div`
   font-size: 28px;
   font-weight: bold;
-  color: #1976D2;
+  color: #1976d2;
   margin-bottom: 5px;
 `;
 
@@ -170,7 +170,7 @@ const EmergencyContainer = styled.div`
 `;
 
 const EmergencyButton = styled.button`
-  background-color: #F44336;
+  background-color: #f44336;
   color: white;
   border: none;
   border-radius: 15px;
@@ -184,15 +184,15 @@ const EmergencyButton = styled.button`
   gap: 8px;
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  
+
   &:hover {
-    background-color: #D32F2F;
+    background-color: #d32f2f;
   }
 `;
 
 /**
  * Patient Dashboard Screen - Web Version
- * 
+ *
  * Main navigation hub for patients with four primary functions:
  * 1. Video Consultation - Connect with doctors via video call
  * 2. My Health Records - View personal medical records
@@ -205,62 +205,69 @@ const PatientDashboardScreen = () => {
 
   useEffect(() => {
     // Get patient ID from session storage
-    const patientId = sessionStorage.getItem('patientId');
-    console.log('PatientDashboardScreen - Retrieved patientId:', patientId);
-    
+    const patientId = sessionStorage.getItem("patientId");
+    console.log("PatientDashboardScreen - Retrieved patientId:", patientId);
+
     if (!patientId) {
-      console.log('No patient ID found, redirecting to login');
+      console.log("No patient ID found, redirecting to login");
       // Redirect to login if no patient ID
-      navigate('/patient/login');
+      navigate("/patient/login");
       return;
     }
 
     // Mock patient data - in real app, this would be an API call
     const mockPatients = {
-      'P001': { id: 'P001', name: 'Rajesh Kumar', age: 45, gender: 'Male' },
-      'P002': { id: 'P002', name: 'Priya Sharma', age: 32, gender: 'Female' },
-      'P003': { id: 'P003', name: 'Amit Patel', age: 28, gender: 'Male' },
-      'P004': { id: 'P004', name: 'Sunita Singh', age: 55, gender: 'Female' },
-      'P005': { id: 'P005', name: 'Vikram Gupta', age: 38, gender: 'Male' },
+      P001: { id: "P001", name: "Rajesh Kumar", age: 45, gender: "Male" },
+      P002: { id: "P002", name: "Priya Sharma", age: 32, gender: "Female" },
+      P003: { id: "P003", name: "Amit Patel", age: 28, gender: "Male" },
+      P004: { id: "P004", name: "Sunita Singh", age: 55, gender: "Female" },
+      P005: { id: "P005", name: "Vikram Gupta", age: 38, gender: "Male" },
     };
 
-    const patientData = mockPatients[patientId] || { id: patientId, name: 'Patient', age: 'N/A', gender: 'N/A' };
-    console.log('Setting patient info:', patientData);
+    const patientData = mockPatients[patientId] || {
+      id: patientId,
+      name: "Patient",
+      age: "N/A",
+      gender: "N/A",
+    };
+    console.log("Setting patient info:", patientData);
     setPatientInfo(patientData);
   }, [navigate]);
 
   const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
-      sessionStorage.removeItem('patientId');
-      navigate('/');
+    if (window.confirm("Are you sure you want to logout?")) {
+      sessionStorage.removeItem("patientId");
+      navigate("/");
     }
   };
 
   const handleVideoConsultation = () => {
-    navigate('/patient/video-consultation');
+    navigate("/patient/video-consultation");
   };
 
   const handleHealthRecords = () => {
-    navigate('/patient/health-records');
+    navigate("/patient/health-records");
   };
 
   const handlePrescriptions = () => {
-    navigate('/patient/prescriptions');
+    navigate("/patient/prescriptions");
   };
 
   const handleSymptomChecker = () => {
-    navigate('/patient/symptom-checker');
+    navigate("/patient/symptom-checker");
   };
 
   const handleEmergency = () => {
     // In a real app, this would trigger emergency protocols
-    alert('Emergency contact activated! Please call your local emergency number.');
+    alert(
+      "Emergency contact activated! Please call your local emergency number.",
+    );
   };
 
   if (!patientInfo) {
     return (
       <Container>
-        <div style={{ padding: '20px', textAlign: 'center' }}>
+        <div style={{ padding: "20px", textAlign: "center" }}>
           <p>Loading patient information...</p>
         </div>
       </Container>
@@ -271,20 +278,25 @@ const PatientDashboardScreen = () => {
     <Container>
       <Header>
         <HeaderLeft>
-          <div style={{ 
-            width: '40px', 
-            height: '40px', 
-            borderRadius: '50%', 
-            backgroundColor: 'rgba(255,255,255,0.2)', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center' 
-          }}>
+          <div
+            style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              backgroundColor: "rgba(255,255,255,0.2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <FaUser />
           </div>
           <PatientInfo>
             <HeaderTitle>Welcome, {patientInfo.name}</HeaderTitle>
-            <HeaderSubtitle>Patient ID: {patientInfo.id} | {patientInfo.age} years, {patientInfo.gender}</HeaderSubtitle>
+            <HeaderSubtitle>
+              Patient ID: {patientInfo.id} | {patientInfo.age} years,{" "}
+              {patientInfo.gender}
+            </HeaderSubtitle>
           </PatientInfo>
         </HeaderLeft>
         <LogoutButton onClick={handleLogout}>
@@ -304,7 +316,7 @@ const PatientDashboardScreen = () => {
               Connect with doctors for live video consultations
             </CardDescription>
             <CardBadge>
-              <CardBadgeText>3 doctors available</CardBadgeText>
+              <CardBadgeText>doctors available</CardBadgeText>
             </CardBadge>
           </DashboardCard>
 

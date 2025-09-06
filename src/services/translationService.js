@@ -26,10 +26,16 @@ export const translateText = async (text, targetLang, sourceLang = "en") => {
       return text;
     }
 
+    // Strip HTML tags for translation, then re-apply formatting afterward
+    const plainText = text
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
     const response = await fetch(
       `${TRANSLATE_API_URL}?q=${encodeURIComponent(
-        text
-      )}&langpair=${sourceLang}|${targetLang}`
+        plainText,
+      )}&langpair=${sourceLang}|${targetLang}`,
     );
 
     if (!response.ok) {
@@ -39,6 +45,7 @@ export const translateText = async (text, targetLang, sourceLang = "en") => {
     const data = await response.json();
 
     if (data.responseStatus === 200 && data.responseData) {
+      // Return the translated text - formatting will be applied by the calling component
       return data.responseData.translatedText;
     } else {
       throw new Error("Translation failed");

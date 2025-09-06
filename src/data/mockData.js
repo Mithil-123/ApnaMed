@@ -1,6 +1,6 @@
 /**
  * Mock Data and API Simulation Functions - Web Version
- * 
+ *
  * This file contains all the mock data and simulated API calls for the ApnaMed web application.
  * In a real application, these would be replaced with actual API calls to a backend service.
  */
@@ -8,240 +8,284 @@
 // Mock patient data
 export const mockPatients = [
   {
-    id: 'P001',
-    name: 'Rajesh Kumar',
+    id: "P001",
+    name: "Rajesh Kumar",
     age: 45,
-    gender: 'Male',
-    avatar: '👨',
-    symptoms: 'Fever, cough',
-    priority: 'High',
-    waitingTime: '5 mins',
-    medicalHistory: ['Diabetes', 'Hypertension'],
-    allergies: ['Penicillin'],
-    currentMedications: ['Metformin', 'Lisinopril']
+    gender: "Male",
+    avatar: "👨",
+    symptoms: "Fever, cough",
+    priority: "High",
+    waitingTime: "5 mins",
+    medicalHistory: ["Diabetes", "Hypertension"],
+    allergies: ["Penicillin"],
+    currentMedications: ["Metformin", "Lisinopril"],
   },
   {
-    id: 'P002',
-    name: 'Priya Sharma',
+    id: "P002",
+    name: "Priya Sharma",
     age: 32,
-    gender: 'Female',
-    avatar: '👩',
-    symptoms: 'Headache, nausea',
-    priority: 'Medium',
-    waitingTime: '10 mins',
-    medicalHistory: ['Migraine'],
-    allergies: ['None'],
-    currentMedications: ['Ibuprofen']
+    gender: "Female",
+    avatar: "👩",
+    symptoms: "Headache, nausea",
+    priority: "Medium",
+    waitingTime: "10 mins",
+    medicalHistory: ["Migraine"],
+    allergies: ["None"],
+    currentMedications: ["Ibuprofen"],
   },
   {
-    id: 'P003',
-    name: 'Amit Singh',
+    id: "P003",
+    name: "Amit Singh",
     age: 28,
-    gender: 'Male',
-    avatar: '👨',
-    symptoms: 'Chest pain',
-    priority: 'High',
-    waitingTime: '2 mins',
-    medicalHistory: ['None'],
-    allergies: ['Aspirin'],
-    currentMedications: ['None']
-  }
+    gender: "Male",
+    avatar: "👨",
+    symptoms: "Chest pain",
+    priority: "High",
+    waitingTime: "2 mins",
+    medicalHistory: ["None"],
+    allergies: ["Aspirin"],
+    currentMedications: ["None"],
+  },
 ];
 
 // Mock doctor data
 export const mockDoctors = [
   {
-    id: 'D001',
-    name: 'Dr. Anjali Patel',
-    specialization: 'General Medicine',
-    avatar: '👩‍⚕️',
+    id: "D001",
+    name: "Dr. Anjali Patel",
+    specialization: "General Medicine",
+    avatar: "👩‍⚕️",
     rating: 4.8,
-    experience: '10 years',
-    available: true
+    experience: "10 years",
+    available: true,
+    languages: ["English", "Hindi", "Gujarati"],
   },
   {
-    id: 'D002',
-    name: 'Dr. Rajesh Verma',
-    specialization: 'Cardiology',
-    avatar: '👨‍⚕️',
+    id: "D002",
+    name: "Dr. Rajesh Verma",
+    specialization: "Cardiology",
+    avatar: "👨‍⚕️",
     rating: 4.9,
-    experience: '15 years',
-    available: true
+    experience: "15 years",
+    available: true,
+    languages: ["English", "Hindi", "Punjabi"],
   },
   {
-    id: 'D003',
-    name: 'Dr. Sunita Reddy',
-    specialization: 'Pediatrics',
-    avatar: '👩‍⚕️',
+    id: "D003",
+    name: "Dr. Sunita Reddy",
+    specialization: "Pediatrics",
+    avatar: "👩‍⚕️",
     rating: 4.7,
-    experience: '8 years',
-    available: true
-  }
+    experience: "8 years",
+    available: true,
+    languages: ["English", "Hindi", "Telugu", "Tamil"],
+  },
+  {
+    id: "D004",
+    name: "Dr. Ahmed Hassan",
+    specialization: "Orthopedics",
+    avatar: "👨‍⚕️",
+    rating: 4.6,
+    experience: "12 years",
+    available: true,
+    languages: ["English", "Arabic", "Urdu"],
+  },
+  {
+    id: "D005",
+    name: "Dr. Maria Fernandez",
+    specialization: "Dermatology",
+    avatar: "👩‍⚕️",
+    rating: 4.9,
+    experience: "7 years",
+    available: false,
+    languages: ["English", "Spanish", "Hindi"],
+  },
+  {
+    id: "D006",
+    name: "Dr. Vikram Joshi",
+    specialization: "Neurology",
+    avatar: "👨‍⚕️",
+    rating: 4.8,
+    experience: "18 years",
+    available: true,
+    languages: ["English", "Hindi", "Marathi", "Bengali"],
+  },
+  {
+    id: "D007",
+    name: "Dr. Lisa Chen",
+    specialization: "Psychiatry",
+    avatar: "👩‍⚕️",
+    rating: 4.5,
+    experience: "9 years",
+    available: true,
+    languages: ["English", "Mandarin", "Hindi"],
+  },
 ];
 
 // Mock pharmacy data
 export const mockPharmacies = [
   {
-    id: 'PH001',
-    name: 'Apollo Pharmacy',
-    address: '123 Main Street, City Center',
-    distance: '0.5 km',
-    phone: '+91-9876543210',
+    id: "PH001",
+    name: "Apollo Pharmacy",
+    address: "123 Main Street, City Center",
+    distance: "0.5 km",
+    phone: "+91-9876543210",
     available: true,
-    medicines: ['Paracetamol', 'Amoxicillin', 'Metformin']
+    medicines: ["Paracetamol", "Amoxicillin", "Metformin"],
   },
   {
-    id: 'PH002',
-    name: 'MedPlus Pharmacy',
-    address: '456 Park Avenue, Downtown',
-    distance: '1.2 km',
-    phone: '+91-9876543211',
+    id: "PH002",
+    name: "MedPlus Pharmacy",
+    address: "456 Park Avenue, Downtown",
+    distance: "1.2 km",
+    phone: "+91-9876543211",
     available: true,
-    medicines: ['Ibuprofen', 'Ciprofloxacin', 'Lisinopril']
+    medicines: ["Ibuprofen", "Ciprofloxacin", "Lisinopril"],
   },
   {
-    id: 'PH003',
-    name: 'Wellness Pharmacy',
-    address: '789 Health Plaza, Suburb',
-    distance: '2.1 km',
-    phone: '+91-9876543212',
+    id: "PH003",
+    name: "Wellness Pharmacy",
+    address: "789 Health Plaza, Suburb",
+    distance: "2.1 km",
+    phone: "+91-9876543212",
     available: false,
-    medicines: ['Aspirin', 'Omeprazole']
-  }
+    medicines: ["Aspirin", "Omeprazole"],
+  },
 ];
 
 // Mock prescription data
 export const mockPrescriptions = [
   {
-    id: 'RX001',
-    patientId: 'P001',
-    doctorId: 'D001',
-    date: '2024-01-15',
+    id: "RX001",
+    patientId: "P001",
+    doctorId: "D001",
+    date: "2024-01-15",
     medicines: [
       {
-        name: 'Paracetamol',
-        dosage: '500mg',
-        frequency: 'Twice daily',
-        duration: '5 days',
-        instructions: 'Take with food'
+        name: "Paracetamol",
+        dosage: "500mg",
+        frequency: "Twice daily",
+        duration: "5 days",
+        instructions: "Take with food",
       },
       {
-        name: 'Amoxicillin',
-        dosage: '250mg',
-        frequency: 'Three times daily',
-        duration: '7 days',
-        instructions: 'Take before meals'
-      }
+        name: "Amoxicillin",
+        dosage: "250mg",
+        frequency: "Three times daily",
+        duration: "7 days",
+        instructions: "Take before meals",
+      },
     ],
-    notes: 'Patient has fever and cough. Complete the full course of antibiotics.'
+    notes:
+      "Patient has fever and cough. Complete the full course of antibiotics.",
   },
   {
-    id: 'RX002',
-    patientId: 'P002',
-    doctorId: 'D001',
-    date: '2024-01-14',
+    id: "RX002",
+    patientId: "P002",
+    doctorId: "D001",
+    date: "2024-01-14",
     medicines: [
       {
-        name: 'Ibuprofen',
-        dosage: '400mg',
-        frequency: 'As needed',
-        duration: '3 days',
-        instructions: 'Take with water'
-      }
+        name: "Ibuprofen",
+        dosage: "400mg",
+        frequency: "As needed",
+        duration: "3 days",
+        instructions: "Take with water",
+      },
     ],
-    notes: 'For headache relief. Do not exceed 3 tablets per day.'
-  }
+    notes: "For headache relief. Do not exceed 3 tablets per day.",
+  },
 ];
 
 // Mock health records
 export const mockHealthRecords = {
-  'P001': {
-    patientId: 'P001',
-    name: 'Rajesh Kumar',
+  P001: {
+    patientId: "P001",
+    name: "Rajesh Kumar",
     age: 45,
-    gender: 'Male',
-    bloodGroup: 'B+',
-    height: '170 cm',
-    weight: '75 kg',
-    bmi: '25.9',
+    gender: "Male",
+    bloodGroup: "B+",
+    height: "170 cm",
+    weight: "75 kg",
+    bmi: "25.9",
     vitalSigns: {
-      bloodPressure: '140/90',
-      heartRate: '85 bpm',
-      temperature: '98.6°F',
-      lastUpdated: '2024-01-15'
+      bloodPressure: "140/90",
+      heartRate: "85 bpm",
+      temperature: "98.6°F",
+      lastUpdated: "2024-01-15",
     },
-    medicalHistory: ['Diabetes Type 2', 'Hypertension'],
-    allergies: ['Penicillin', 'Shellfish'],
-    currentMedications: ['Metformin 500mg', 'Lisinopril 10mg'],
+    medicalHistory: ["Diabetes Type 2", "Hypertension"],
+    allergies: ["Penicillin", "Shellfish"],
+    currentMedications: ["Metformin 500mg", "Lisinopril 10mg"],
     recentVisits: [
       {
-        date: '2024-01-15',
-        doctor: 'Dr. Anjali Patel',
-        reason: 'Fever and cough',
-        diagnosis: 'Upper respiratory infection'
+        date: "2024-01-15",
+        doctor: "Dr. Anjali Patel",
+        reason: "Fever and cough",
+        diagnosis: "Upper respiratory infection",
       },
       {
-        date: '2024-01-01',
-        doctor: 'Dr. Rajesh Verma',
-        reason: 'Routine checkup',
-        diagnosis: 'Stable condition'
-      }
-    ]
+        date: "2024-01-01",
+        doctor: "Dr. Rajesh Verma",
+        reason: "Routine checkup",
+        diagnosis: "Stable condition",
+      },
+    ],
   },
-  'P002': {
-    patientId: 'P002',
-    name: 'Priya Sharma',
+  P002: {
+    patientId: "P002",
+    name: "Priya Sharma",
     age: 32,
-    gender: 'Female',
-    bloodGroup: 'A+',
-    height: '165 cm',
-    weight: '60 kg',
-    bmi: '22.0',
+    gender: "Female",
+    bloodGroup: "A+",
+    height: "165 cm",
+    weight: "60 kg",
+    bmi: "22.0",
     vitalSigns: {
-      bloodPressure: '120/80',
-      heartRate: '72 bpm',
-      temperature: '98.4°F',
-      lastUpdated: '2024-01-14'
+      bloodPressure: "120/80",
+      heartRate: "72 bpm",
+      temperature: "98.4°F",
+      lastUpdated: "2024-01-14",
     },
-    medicalHistory: ['Migraine'],
-    allergies: ['None'],
-    currentMedications: ['Ibuprofen 400mg'],
+    medicalHistory: ["Migraine"],
+    allergies: ["None"],
+    currentMedications: ["Ibuprofen 400mg"],
     recentVisits: [
       {
-        date: '2024-01-14',
-        doctor: 'Dr. Anjali Patel',
-        reason: 'Headache and nausea',
-        diagnosis: 'Migraine episode'
-      }
-    ]
+        date: "2024-01-14",
+        doctor: "Dr. Anjali Patel",
+        reason: "Headache and nausea",
+        diagnosis: "Migraine episode",
+      },
+    ],
   },
-  'P003': {
-    patientId: 'P003',
-    name: 'Amit Singh',
+  P003: {
+    patientId: "P003",
+    name: "Amit Singh",
     age: 28,
-    gender: 'Male',
-    bloodGroup: 'O+',
-    height: '175 cm',
-    weight: '70 kg',
-    bmi: '22.9',
+    gender: "Male",
+    bloodGroup: "O+",
+    height: "175 cm",
+    weight: "70 kg",
+    bmi: "22.9",
     vitalSigns: {
-      bloodPressure: '110/70',
-      heartRate: '68 bpm',
-      temperature: '98.2°F',
-      lastUpdated: '2024-01-13'
+      bloodPressure: "110/70",
+      heartRate: "68 bpm",
+      temperature: "98.2°F",
+      lastUpdated: "2024-01-13",
     },
-    medicalHistory: ['None'],
-    allergies: ['Aspirin'],
-    currentMedications: ['None'],
+    medicalHistory: ["None"],
+    allergies: ["Aspirin"],
+    currentMedications: ["None"],
     recentVisits: [
       {
-        date: '2024-01-13',
-        doctor: 'Dr. Rajesh Verma',
-        reason: 'Chest pain',
-        diagnosis: 'Muscle strain - no cardiac issues'
-      }
-    ]
-  }
+        date: "2024-01-13",
+        doctor: "Dr. Rajesh Verma",
+        reason: "Chest pain",
+        diagnosis: "Muscle strain - no cardiac issues",
+      },
+    ],
+  },
 };
 
 /**
@@ -250,7 +294,8 @@ export const mockHealthRecords = {
  */
 
 // Simulate network delay
-const simulateDelay = (ms = 1000) => new Promise(resolve => setTimeout(resolve, ms));
+const simulateDelay = (ms = 1000) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
  * Fetch patient records by patient ID
@@ -268,7 +313,9 @@ export const fetchPatientRecords = async (patientId) => {
  */
 export const fetchPatientQueue = async () => {
   await simulateDelay(500);
-  return mockPatients.filter(patient => patient.priority === 'High' || patient.priority === 'Medium');
+  return mockPatients.filter(
+    (patient) => patient.priority === "High" || patient.priority === "Medium",
+  );
 };
 
 /**
@@ -277,7 +324,7 @@ export const fetchPatientQueue = async () => {
  */
 export const fetchAvailableDoctors = async () => {
   await simulateDelay(600);
-  return mockDoctors.filter(doctor => doctor.available);
+  return mockDoctors.filter((doctor) => doctor.available);
 };
 
 /**
@@ -297,7 +344,9 @@ export const fetchMyHealthRecords = async (patientId) => {
  */
 export const fetchMyPrescriptions = async (patientId) => {
   await simulateDelay(600);
-  return mockPrescriptions.filter(prescription => prescription.patientId === patientId);
+  return mockPrescriptions.filter(
+    (prescription) => prescription.patientId === patientId,
+  );
 };
 
 /**
@@ -307,10 +356,10 @@ export const fetchMyPrescriptions = async (patientId) => {
  */
 export const findPharmaciesWithMedicine = async (medicineName) => {
   await simulateDelay(800);
-  return mockPharmacies.filter(pharmacy => 
-    pharmacy.medicines.some(med => 
-      med.toLowerCase().includes(medicineName.toLowerCase())
-    )
+  return mockPharmacies.filter((pharmacy) =>
+    pharmacy.medicines.some((med) =>
+      med.toLowerCase().includes(medicineName.toLowerCase()),
+    ),
   );
 };
 
@@ -324,7 +373,7 @@ export const addPrescription = async (prescription) => {
   const newPrescription = {
     id: `RX${Date.now()}`,
     ...prescription,
-    date: new Date().toISOString().split('T')[0]
+    date: new Date().toISOString().split("T")[0],
   };
   mockPrescriptions.push(newPrescription);
   return newPrescription;
@@ -337,24 +386,24 @@ export const addPrescription = async (prescription) => {
  * @returns {Promise<Object>} Updated patient records
  */
 export const updatePatientRecords = async (patientId, updates) => {
-  console.log('updatePatientRecords called with:', { patientId, updates });
+  console.log("updatePatientRecords called with:", { patientId, updates });
   await simulateDelay(600);
-  
+
   if (mockHealthRecords[patientId]) {
-    console.log('Found patient records for ID:', patientId);
-    console.log('Current records:', mockHealthRecords[patientId]);
-    console.log('Applying updates:', updates);
-    
+    console.log("Found patient records for ID:", patientId);
+    console.log("Current records:", mockHealthRecords[patientId]);
+    console.log("Applying updates:", updates);
+
     mockHealthRecords[patientId] = {
       ...mockHealthRecords[patientId],
-      ...updates
+      ...updates,
     };
-    
-    console.log('Updated records:', mockHealthRecords[patientId]);
+
+    console.log("Updated records:", mockHealthRecords[patientId]);
     return mockHealthRecords[patientId];
   } else {
-    console.error('No patient records found for ID:', patientId);
-    console.log('Available patient IDs:', Object.keys(mockHealthRecords));
+    console.error("No patient records found for ID:", patientId);
+    console.log("Available patient IDs:", Object.keys(mockHealthRecords));
     return null;
   }
 };

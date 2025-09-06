@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { fetchAvailableDoctors } from '../data/mockData';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { fetchAvailableDoctors } from "../data/mockData";
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: #E3F2FD;
+  background-color: #e3f2fd;
 `;
 
 const Header = styled.div`
-  background-color: #1976D2;
+  background-color: #1976d2;
   color: white;
   padding: 20px;
   text-align: center;
@@ -23,7 +23,7 @@ const HeaderTitle = styled.h1`
 
 const HeaderSubtitle = styled.p`
   font-size: 14px;
-  color: #E3F2FD;
+  color: #e3f2fd;
 `;
 
 const Content = styled.div`
@@ -43,7 +43,7 @@ const CountContainer = styled.div`
 
 const CountText = styled.p`
   font-size: 14px;
-  color: #1976D2;
+  color: #1976d2;
   font-weight: 600;
 `;
 
@@ -53,7 +53,7 @@ const DoctorCard = styled.div`
   padding: 20px;
   margin-bottom: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #1976D2;
+  border-left: 4px solid #1976d2;
 `;
 
 const DoctorHeader = styled.div`
@@ -71,7 +71,7 @@ const Avatar = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #E3F2FD;
+  background-color: #e3f2fd;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,7 +82,7 @@ const OnlineIndicator = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border-radius: 8px;
   width: 16px;
   height: 16px;
@@ -103,7 +103,7 @@ const DoctorInfo = styled.div`
 const DoctorName = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  color: #1976D2;
+  color: #1976d2;
   margin-bottom: 5px;
 `;
 
@@ -132,19 +132,45 @@ const RatingIcon = styled.span`
 const RatingText = styled.span`
   font-size: 14px;
   font-weight: bold;
-  color: #FF9800;
+  color: #ff9800;
 `;
 
+const LanguagesContainer = styled.div`
+  margin-top: 8px;
+`;
+
+const LanguagesTitle = styled.p`
+  font-size: 12px;
+  color: #666666;
+  margin-bottom: 4px;
+  font-weight: 600;
+`;
+
+const LanguagesList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+`;
+
+const LanguageTag = styled.span`
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1px solid #bbdefb;
+  font-weight: 500;
+`;
 
 const ConsultButton = styled.button`
-  background-color: ${props => props.available ? '#1976D2' : '#CCCCCC'};
+  background-color: ${(props) => (props.available ? "#1976D2" : "#CCCCCC")};
   color: white;
   border: none;
   border-radius: 25px;
   padding: 20px 40px;
   font-size: 20px;
   font-weight: bold;
-  cursor: ${props => props.available ? 'pointer' : 'not-allowed'};
+  cursor: ${(props) => (props.available ? "pointer" : "not-allowed")};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,46 +180,49 @@ const ConsultButton = styled.button`
   max-width: 300px;
   box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
   transition: all 0.3s ease;
-  
+
   &:hover {
-    background-color: ${props => props.available ? '#1565C0' : '#CCCCCC'};
-    transform: ${props => props.available ? 'translateY(-2px)' : 'none'};
-    box-shadow: ${props => props.available ? '0 6px 16px rgba(25, 118, 210, 0.4)' : '0 4px 12px rgba(25, 118, 210, 0.3)'};
+    background-color: ${(props) => (props.available ? "#1565C0" : "#CCCCCC")};
+    transform: ${(props) => (props.available ? "translateY(-2px)" : "none")};
+    box-shadow: ${(props) =>
+      props.available
+        ? "0 6px 16px rgba(25, 118, 210, 0.4)"
+        : "0 4px 12px rgba(25, 118, 210, 0.3)"};
   }
-  
+
   &:active {
-    transform: ${props => props.available ? 'translateY(0px)' : 'none'};
+    transform: ${(props) => (props.available ? "translateY(0px)" : "none")};
   }
 `;
 
 const RefreshButton = styled.button`
   background-color: white;
-  color: #1976D2;
-  border: 1px solid #1976D2;
+  color: #1976d2;
+  border: 1px solid #1976d2;
   border-radius: 10px;
   padding: 10px 20px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 20px;
-  
+
   &:hover {
-    background-color: #E3F2FD;
+    background-color: #e3f2fd;
   }
 `;
 
 const TipsContainer = styled.div`
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border-radius: 10px;
   padding: 15px;
   margin-top: 20px;
-  border-left: 4px solid #1976D2;
+  border-left: 4px solid #1976d2;
 `;
 
 const TipsTitle = styled.h3`
   font-size: 14px;
   font-weight: bold;
-  color: #1976D2;
+  color: #1976d2;
   margin-bottom: 8px;
 `;
 
@@ -236,7 +265,7 @@ const EmptyText = styled.p`
 
 /**
  * Patient Video Consultation Screen - Web Version
- * 
+ *
  * Displays a list of available doctors for video consultation.
  * Each doctor shows their avatar, name, specialization, rating, and availability.
  * Patients can tap on a doctor to start a video consultation.
@@ -256,7 +285,7 @@ const PatientVideoConsultationScreen = () => {
       const availableDoctors = await fetchAvailableDoctors();
       setDoctors(availableDoctors);
     } catch (error) {
-      console.error('Failed to load available doctors:', error);
+      console.error("Failed to load available doctors:", error);
     } finally {
       setLoading(false);
     }
@@ -264,7 +293,7 @@ const PatientVideoConsultationScreen = () => {
 
   const handleStartConsultation = (doctor) => {
     if (doctor.available) {
-      navigate('/patient/video-call', { state: { doctor } });
+      navigate("/patient/video-call", { state: { doctor } });
     }
   };
 
@@ -277,8 +306,10 @@ const PatientVideoConsultationScreen = () => {
         </Header>
         <LoadingContainer>
           <div>
-            <div style={{ fontSize: '24px', color: '#2E7D32' }}>⏳</div>
-            <p style={{ marginTop: '10px', fontSize: '16px', color: '#666666' }}>
+            <div style={{ fontSize: "24px", color: "#2E7D32" }}>⏳</div>
+            <p
+              style={{ marginTop: "10px", fontSize: "16px", color: "#666666" }}
+            >
               Loading available doctors...
             </p>
           </div>
@@ -287,7 +318,7 @@ const PatientVideoConsultationScreen = () => {
     );
   }
 
-  const availableCount = doctors.filter(doctor => doctor.available).length;
+  const availableCount = doctors.filter((doctor) => doctor.available).length;
 
   return (
     <Container>
@@ -298,9 +329,7 @@ const PatientVideoConsultationScreen = () => {
 
       <Content>
         <CountContainer>
-          <CountText>
-            {availableCount} doctors available now
-          </CountText>
+          <CountText>{availableCount} doctors available now</CountText>
         </CountContainer>
 
         <RefreshButton onClick={loadAvailableDoctors}>
@@ -311,7 +340,9 @@ const PatientVideoConsultationScreen = () => {
           <EmptyState>
             <EmptyIcon>👨‍⚕️</EmptyIcon>
             <EmptyTitle>No doctors available</EmptyTitle>
-            <EmptyText>Please check back later for available doctors.</EmptyText>
+            <EmptyText>
+              Please check back later for available doctors.
+            </EmptyText>
           </EmptyState>
         ) : (
           doctors.map((doctor) => (
@@ -328,21 +359,38 @@ const PatientVideoConsultationScreen = () => {
 
                 <DoctorInfo>
                   <DoctorName>{doctor.name}</DoctorName>
-                  <DoctorSpecialization>{doctor.specialization}</DoctorSpecialization>
-                  <DoctorExperience>{doctor.experience} experience</DoctorExperience>
-                  
+                  <DoctorSpecialization>
+                    {doctor.specialization}
+                  </DoctorSpecialization>
+                  <DoctorExperience>
+                    {doctor.experience} experience
+                  </DoctorExperience>
+
                   <RatingContainer>
                     <RatingIcon>⭐</RatingIcon>
                     <RatingText>{doctor.rating}</RatingText>
                   </RatingContainer>
+
+                  {doctor.languages && doctor.languages.length > 0 && (
+                    <LanguagesContainer>
+                      <LanguagesTitle>Languages:</LanguagesTitle>
+                      <LanguagesList>
+                        {doctor.languages.map((language, index) => (
+                          <LanguageTag key={index}>{language}</LanguageTag>
+                        ))}
+                      </LanguagesList>
+                    </LanguagesContainer>
+                  )}
                 </DoctorInfo>
               </DoctorHeader>
 
-              <ConsultButton 
+              <ConsultButton
                 available={doctor.available}
                 onClick={() => handleStartConsultation(doctor)}
               >
-                {doctor.available ? '🎥 Start Video Consultation' : '⏰ Not Available'}
+                {doctor.available
+                  ? "🎥 Start Video Consultation"
+                  : "⏰ Not Available"}
               </ConsultButton>
             </DoctorCard>
           ))
