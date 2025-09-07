@@ -941,3 +941,14 @@ export const getPatientCountByDisease = () => {
 
   return counts;
 };
+
+/**
+ * Transform historical diseaseData into chart-friendly format
+ * @returns {Array} Array of objects like [{month, Dengue, Malaria, ...}, ...]
+ */
+export const getChartData = () => {
+  return Object.entries(diseaseData).map(([month, diseases]) => ({
+    month,
+    ...diseases,
+  }));
+};

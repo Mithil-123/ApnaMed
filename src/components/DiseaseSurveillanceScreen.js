@@ -29,7 +29,6 @@ const DiseaseSurveillanceScreen = ({ onBack }) => {
         checkDiseaseWarnings(),
         getDiseaseData(),
       ]);
-
       setWarnings(warningsData);
       setDiseaseData(diseaseInfo);
     } catch (error) {
@@ -59,15 +58,13 @@ const DiseaseSurveillanceScreen = ({ onBack }) => {
     );
   }
 
-  // Prepare chart data safely
+  // Transform data into chart format
   const chartData = diseaseData
     ? Object.keys(diseaseData.historical).map((month) => {
         const data = { month };
-
         Object.keys(diseaseData.current).forEach((disease) => {
           const histVal = diseaseData.historical[month]?.[disease];
           data[disease] = histVal ? parseFloat((histVal * 100).toFixed(1)) : 0;
-
           if (month === "Sep") {
             const currVal = diseaseData.current[disease];
             data[`${disease}_current`] = currVal
@@ -75,23 +72,19 @@ const DiseaseSurveillanceScreen = ({ onBack }) => {
               : 0;
           }
         });
-
         return data;
       })
     : [];
 
-  console.log("chartData", chartData); // Debugging
-  console.log("diseaseData", diseaseData); // Debugging
-
   const colors = [
-    "#3b82f6",
-    "#ef4444",
-    "#10b981",
-    "#8b5cf6",
-    "#f59e0b",
-    "#ec4899",
-    "#6b7280",
-    "#14b8a6",
+    "#3b82f6", // blue
+    "#ef4444", // red
+    "#10b981", // green
+    "#8b5cf6", // purple
+    "#f59e0b", // amber
+    "#ec4899", // pink
+    "#6b7280", // gray
+    "#14b8a6", // teal
   ];
 
   return (
@@ -107,8 +100,8 @@ const DiseaseSurveillanceScreen = ({ onBack }) => {
             </p>
           </div>
 
-          {/* Chart section with fixed height */}
-          <div className="flex-1 h-[500px]">
+          {/* Chart section */}
+          <div style={{ height: 500 }}>
             {chartData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
@@ -116,40 +109,15 @@ const DiseaseSurveillanceScreen = ({ onBack }) => {
                   margin={{ top: 40, right: 40, left: 40, bottom: 40 }}
                 >
                   <CartesianGrid strokeDasharray="2 2" stroke="#f8fafc" />
-                  <XAxis
-                    dataKey="month"
-                    fontSize={14}
-                    fontWeight="600"
-                    stroke="#334155"
-                    axisLine={{ stroke: "#e2e8f0" }}
-                    tickLine={{ stroke: "#e2e8f0" }}
-                  />
+                  <XAxis dataKey="month" />
                   <YAxis
-                    fontSize={14}
-                    fontWeight="600"
-                    stroke="#334155"
-                    axisLine={{ stroke: "#e2e8f0" }}
-                    tickLine={{ stroke: "#e2e8f0" }}
                     label={{
                       value: "Rate (%)",
                       angle: -90,
                       position: "insideLeft",
-                      style: {
-                        textAnchor: "middle",
-                        fontSize: "14px",
-                        fontWeight: "600",
-                      },
                     }}
                   />
                   <Tooltip
-                    contentStyle={{
-                      backgroundColor: "white",
-                      border: "1px solid #e2e8f0",
-                      borderRadius: "12px",
-                      boxShadow: "0 10px 25px -3px rgba(0, 0, 0, 0.1)",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                    }}
                     formatter={(value, name) => {
                       if (name.includes("_current")) {
                         const disease = name.replace("_current", "");
@@ -157,89 +125,52 @@ const DiseaseSurveillanceScreen = ({ onBack }) => {
                       }
                       return [`${value}%`, name];
                     }}
-                    labelStyle={{
-                      fontSize: "16px",
-                      fontWeight: "600",
-                      color: "#1f2937",
-                    }}
                   />
-                  <Legend
-                    wrapperStyle={{
-                      paddingTop: "30px",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                    }}
-                    iconType="line"
-                  />
+                  <Legend />
 
-                  {/* Historical disease lines */}
-                  {diseaseData &&
-                    Object.keys(diseaseData.current).map((disease, index) => {
-                      const isWarning = warnings.some(
-                        (w) => w.disease === disease,
-                      );
-                      const color = isWarning
-                        ? "#ef4444"
-                        : colors[index % colors.length];
+                  {/* Historical lines */}
+                  {Object.keys(diseaseData.current).map((disease, index) => {
+                    const isWarning = warnings.some(
+                      (w) => w.disease === disease,
+                    );
+                    const color = isWarning
+                      ? "#ef4444"
+                      : colors[index % colors.length];
+                    return (
+                      <Line
+                        key={disease}
+                        type="monotone"
+                        dataKey={disease}
+                        stroke={color}
+                        strokeWidth={isWarning ? 3 : 2}
+                        dot={false}
+                      />
+                    );
+                  })}
 
-                      return (
-                        <Line
-                          key={disease}
-                          type="monotone"
-                          dataKey={disease}
-                          stroke={color}
-                          strokeWidth={isWarning ? 3 : 2}
-                          dot={{
-                            fill: color,
-                            strokeWidth: 2,
-                            stroke: "#fff",
-                            r: 5,
-                          }}
-                          activeDot={{
-                            r: 8,
-                            stroke: color,
-                            strokeWidth: 3,
-                            fill: "#fff",
-                          }}
-                          connectNulls={false}
-                        />
-                      );
-                    })}
-
-                  {/* Current data points */}
-                  {diseaseData &&
-                    Object.keys(diseaseData.current).map((disease, index) => {
-                      const isWarning = warnings.some(
-                        (w) => w.disease === disease,
-                      );
-                      const color = isWarning
-                        ? "#ef4444"
-                        : colors[index % colors.length];
-
-                      return (
-                        <Line
-                          key={`${disease}_current`}
-                          type="monotone"
-                          dataKey={`${disease}_current`}
-                          stroke="transparent"
-                          strokeWidth={0}
-                          dot={{
-                            fill: color,
-                            strokeWidth: 4,
-                            stroke: "#fff",
-                            r: 10,
-                            filter: "drop-shadow(0px 4px 8px rgba(0,0,0,0.15))",
-                          }}
-                          activeDot={{
-                            r: 12,
-                            stroke: color,
-                            strokeWidth: 4,
-                            fill: "#fff",
-                          }}
-                          connectNulls={false}
-                        />
-                      );
-                    })}
+                  {/* Current snapshot dots */}
+                  {Object.keys(diseaseData.current).map((disease, index) => {
+                    const isWarning = warnings.some(
+                      (w) => w.disease === disease,
+                    );
+                    const color = isWarning
+                      ? "#ef4444"
+                      : colors[index % colors.length];
+                    return (
+                      <Line
+                        key={`${disease}_current`}
+                        type="monotone"
+                        dataKey={`${disease}_current`}
+                        stroke="transparent"
+                        dot={{
+                          fill: color,
+                          strokeWidth: 4,
+                          stroke: "#fff",
+                          r: 10,
+                        }}
+                      />
+                    );
+                  })}
                 </LineChart>
               </ResponsiveContainer>
             ) : (
