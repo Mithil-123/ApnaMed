@@ -306,7 +306,7 @@ const PatientVideoConsultationScreen = () => {
         </Header>
         <LoadingContainer>
           <div>
-            <div style={{ fontSize: "24px", color: "#2E7D32" }}>⏳</div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
             <p
               style={{ marginTop: "10px", fontSize: "16px", color: "#666666" }}
             >

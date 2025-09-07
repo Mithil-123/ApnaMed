@@ -342,7 +342,7 @@ const PatientHealthRecordsScreen = () => {
 
   const handleEmergency = () => {
     alert(
-      "Emergency contact activated! Please call your local emergency number."
+      "Emergency contact activated! Please call your local emergency number.",
     );
   };
 
@@ -355,7 +355,7 @@ const PatientHealthRecordsScreen = () => {
         </Header>
         <LoadingContainer>
           <div>
-            <div style={{ fontSize: "24px", color: "#1976D2" }}>⏳</div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
             <p
               style={{ marginTop: "10px", fontSize: "16px", color: "#666666" }}
             >

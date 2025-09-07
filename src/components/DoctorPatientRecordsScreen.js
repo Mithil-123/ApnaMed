@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { fetchPatientRecords, updatePatientRecords, addPrescription } from '../data/mockData';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import {
+  fetchPatientRecords,
+  updatePatientRecords,
+  addPrescription,
+} from "../data/mockData";
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: #E3F2FD;
+  background-color: #e3f2fd;
 `;
 
 const Header = styled.div`
-  background-color: #1976D2;
+  background-color: #1976d2;
   color: white;
   padding: 20px;
   text-align: center;
@@ -23,7 +27,7 @@ const HeaderTitle = styled.h1`
 
 const HeaderSubtitle = styled.p`
   font-size: 14px;
-  color: #E3F2FD;
+  color: #e3f2fd;
 `;
 
 const Content = styled.div`
@@ -43,7 +47,7 @@ const SearchContainer = styled.div`
 const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 15px;
@@ -52,7 +56,7 @@ const SearchInputContainer = styled.div`
 const SearchIcon = styled.span`
   font-size: 18px;
   margin-right: 10px;
-  color: #1976D2;
+  color: #1976d2;
 `;
 
 const SearchInput = styled.input`
@@ -62,7 +66,7 @@ const SearchInput = styled.input`
   border: none;
   background: transparent;
   outline: none;
-  
+
   &::placeholder {
     color: #999999;
   }
@@ -74,7 +78,7 @@ const SearchButtons = styled.div`
 `;
 
 const SearchButton = styled.button`
-  background-color: #1976D2;
+  background-color: #1976d2;
   color: white;
   border: none;
   border-radius: 10px;
@@ -82,19 +86,19 @@ const SearchButton = styled.button`
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  
+
   &:hover {
-    background-color: #1565C0;
+    background-color: #1565c0;
   }
-  
+
   &:disabled {
-    background-color: #CCCCCC;
+    background-color: #cccccc;
     cursor: not-allowed;
   }
 `;
 
 const ClearButton = styled.button`
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
   color: #666666;
   border: none;
   border-radius: 10px;
@@ -102,9 +106,9 @@ const ClearButton = styled.button`
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  
+
   &:hover {
-    background-color: #CCCCCC;
+    background-color: #cccccc;
   }
 `;
 
@@ -116,7 +120,7 @@ const RecordsContainer = styled.div`
 `;
 
 const SectionCard = styled.div`
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 15px;
@@ -125,7 +129,7 @@ const SectionCard = styled.div`
 const SectionTitle = styled.h3`
   font-size: 16px;
   font-weight: bold;
-  color: #1976D2;
+  color: #1976d2;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -156,11 +160,11 @@ const ListItem = styled.div`
 `;
 
 const VisitItem = styled.div`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 10px;
-  border-left: 3px solid #1976D2;
+  border-left: 3px solid #1976d2;
 `;
 
 const VisitHeader = styled.div`
@@ -172,7 +176,7 @@ const VisitHeader = styled.div`
 const VisitDate = styled.span`
   font-size: 12px;
   font-weight: bold;
-  color: #1976D2;
+  color: #1976d2;
 `;
 
 const VisitDoctor = styled.span`
@@ -186,17 +190,17 @@ const VisitDetails = styled.div`
 `;
 
 const DemoContainer = styled.div`
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border-radius: 10px;
   padding: 15px;
   margin-top: 20px;
-  border-left: 4px solid #1976D2;
+  border-left: 4px solid #1976d2;
 `;
 
 const DemoTitle = styled.h4`
   font-size: 14px;
   font-weight: bold;
-  color: #1976D2;
+  color: #1976d2;
   margin-bottom: 8px;
 `;
 
@@ -207,8 +211,8 @@ const DemoText = styled.p`
 `;
 
 const ErrorMessage = styled.div`
-  background-color: #FFEBEE;
-  color: #C62828;
+  background-color: #ffebee;
+  color: #c62828;
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -230,7 +234,7 @@ const SectionHeader = styled.div`
 `;
 
 const EditButton = styled.button`
-  background-color: #1976D2;
+  background-color: #1976d2;
   color: white;
   border: none;
   border-radius: 6px;
@@ -238,9 +242,9 @@ const EditButton = styled.button`
   font-size: 12px;
   font-weight: bold;
   cursor: pointer;
-  
+
   &:hover {
-    background-color: #1565C0;
+    background-color: #1565c0;
   }
 `;
 
@@ -250,7 +254,7 @@ const EditContainer = styled.div`
 
 const EditInput = styled.textarea`
   width: 100%;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border: none;
   border-radius: 8px;
   padding: 12px;
@@ -259,10 +263,10 @@ const EditInput = styled.textarea`
   margin-bottom: 10px;
   resize: vertical;
   min-height: 60px;
-  
+
   &:focus {
     outline: none;
-    border: 2px solid #1976D2;
+    border: 2px solid #1976d2;
   }
 `;
 
@@ -272,7 +276,7 @@ const EditButtons = styled.div`
 `;
 
 const SaveButton = styled.button`
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 6px;
@@ -281,14 +285,14 @@ const SaveButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   flex: 1;
-  
+
   &:hover {
-    background-color: #45A049;
+    background-color: #45a049;
   }
 `;
 
 const CancelButton = styled.button`
-  background-color: #F44336;
+  background-color: #f44336;
   color: white;
   border: none;
   border-radius: 6px;
@@ -297,14 +301,14 @@ const CancelButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   flex: 1;
-  
+
   &:hover {
-    background-color: #D32F2F;
+    background-color: #d32f2f;
   }
 `;
 
 const PrescriptionButton = styled.button`
-  background-color: #1976D2;
+  background-color: #1976d2;
   color: white;
   border: none;
   border-radius: 8px;
@@ -312,9 +316,9 @@ const PrescriptionButton = styled.button`
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  
+
   &:hover {
-    background-color: #1565C0;
+    background-color: #1565c0;
   }
 `;
 
@@ -344,30 +348,30 @@ const ModalContent = styled.div`
 const ModalTitle = styled.h2`
   font-size: 18px;
   font-weight: bold;
-  color: #1976D2;
+  color: #1976d2;
   margin-bottom: 20px;
   text-align: center;
 `;
 
 const ModalInput = styled.input`
   width: 100%;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border: none;
   border-radius: 8px;
   padding: 12px;
   font-size: 14px;
   color: #333333;
   margin-bottom: 15px;
-  
+
   &:focus {
     outline: none;
-    border: 2px solid #1976D2;
+    border: 2px solid #1976d2;
   }
 `;
 
 const ModalTextArea = styled.textarea`
   width: 100%;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border: none;
   border-radius: 8px;
   padding: 12px;
@@ -376,10 +380,10 @@ const ModalTextArea = styled.textarea`
   margin-bottom: 15px;
   resize: vertical;
   min-height: 80px;
-  
+
   &:focus {
     outline: none;
-    border: 2px solid #1976D2;
+    border: 2px solid #1976d2;
   }
 `;
 
@@ -390,7 +394,7 @@ const ModalButtons = styled.div`
 `;
 
 const ModalSaveButton = styled.button`
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 8px;
@@ -399,14 +403,14 @@ const ModalSaveButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   flex: 1;
-  
+
   &:hover {
-    background-color: #45A049;
+    background-color: #45a049;
   }
 `;
 
 const ModalCancelButton = styled.button`
-  background-color: #F44336;
+  background-color: #f44336;
   color: white;
   border: none;
   border-radius: 8px;
@@ -415,122 +419,144 @@ const ModalCancelButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   flex: 1;
-  
+
   &:hover {
-    background-color: #D32F2F;
+    background-color: #d32f2f;
   }
 `;
 
 /**
  * Doctor Patient Records Screen - Web Version
- * 
+ *
  * Allows doctors to search for and view patient medical records.
  * Features a search interface with magnifying glass icon and
  * detailed patient information display.
  */
 const DoctorPatientRecordsScreen = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [patientRecords, setPatientRecords] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [editingField, setEditingField] = useState(null);
-  const [editValue, setEditValue] = useState('');
+  const [editValue, setEditValue] = useState("");
   const [showPrescriptionModal, setShowPrescriptionModal] = useState(false);
   const [prescriptionData, setPrescriptionData] = useState({
-    medicineName: '',
-    dosage: '',
-    frequency: '',
-    duration: '',
-    instructions: ''
+    medicineName: "",
+    dosage: "",
+    frequency: "",
+    duration: "",
+    instructions: "",
   });
 
   const handleSearch = async () => {
-    if (searchQuery.trim() === '') {
-      setError('Please enter a patient ID');
+    if (searchQuery.trim() === "") {
+      setError("Please enter a patient ID");
       return;
     }
 
     try {
       setLoading(true);
-      setError('');
+      setError("");
       const records = await fetchPatientRecords(searchQuery.trim());
-      
+
       if (records) {
         setPatientRecords(records);
       } else {
-        setError('No patient records found for this ID');
+        setError("No patient records found for this ID");
         setPatientRecords(null);
       }
     } catch (error) {
-      setError('Failed to fetch patient records');
+      setError("Failed to fetch patient records");
     } finally {
       setLoading(false);
     }
   };
 
   const clearSearch = () => {
-    setSearchQuery('');
+    setSearchQuery("");
     setPatientRecords(null);
-    setError('');
+    setError("");
   };
 
   const startEditing = (field, currentValue) => {
     setEditingField(field);
-    setEditValue(Array.isArray(currentValue) ? currentValue.join(', ') : currentValue);
+    setEditValue(
+      Array.isArray(currentValue) ? currentValue.join(", ") : currentValue,
+    );
   };
 
   const saveEdit = async () => {
     if (!patientRecords || !editingField) {
-      console.error('Cannot save: missing patientRecords or editingField', { patientRecords: !!patientRecords, editingField });
+      console.error("Cannot save: missing patientRecords or editingField", {
+        patientRecords: !!patientRecords,
+        editingField,
+      });
       return;
     }
 
-    console.log('Saving edit:', { editingField, editValue, patientId: patientRecords.patientId });
+    console.log("Saving edit:", {
+      editingField,
+      editValue,
+      patientId: patientRecords.patientId,
+    });
 
     try {
       const updates = {};
-      if (editingField === 'medicalHistory' || editingField === 'allergies' || editingField === 'currentMedications') {
-        updates[editingField] = editValue.split(',').map(item => item.trim()).filter(item => item);
-        console.log('Array field update:', updates);
-      } else if (editingField.startsWith('vitalSigns.')) {
-        const vitalField = editingField.split('.')[1];
+      if (
+        editingField === "medicalHistory" ||
+        editingField === "allergies" ||
+        editingField === "currentMedications"
+      ) {
+        updates[editingField] = editValue
+          .split(",")
+          .map((item) => item.trim())
+          .filter((item) => item);
+        console.log("Array field update:", updates);
+      } else if (editingField.startsWith("vitalSigns.")) {
+        const vitalField = editingField.split(".")[1];
         updates.vitalSigns = {
           ...patientRecords.vitalSigns,
           [vitalField]: editValue,
-          lastUpdated: new Date().toISOString().split('T')[0]
+          lastUpdated: new Date().toISOString().split("T")[0],
         };
-        console.log('Vital signs update:', updates);
+        console.log("Vital signs update:", updates);
       } else {
         updates[editingField] = editValue;
-        console.log('Simple field update:', updates);
+        console.log("Simple field update:", updates);
       }
 
-      console.log('Calling updatePatientRecords with:', { patientId: patientRecords.patientId, updates });
-      const updatedRecords = await updatePatientRecords(patientRecords.patientId, updates);
-      console.log('Update result:', updatedRecords);
-      
+      console.log("Calling updatePatientRecords with:", {
+        patientId: patientRecords.patientId,
+        updates,
+      });
+      const updatedRecords = await updatePatientRecords(
+        patientRecords.patientId,
+        updates,
+      );
+      console.log("Update result:", updatedRecords);
+
       if (updatedRecords) {
         setPatientRecords(updatedRecords);
-        setError('');
-        alert('Patient records updated successfully');
-        console.log('Records updated successfully');
+        setError("");
+        alert("Patient records updated successfully");
+        console.log("Records updated successfully");
       } else {
-        console.error('updatePatientRecords returned null');
-        setError('Failed to update patient records - no data returned');
+        console.error("updatePatientRecords returned null");
+        setError("Failed to update patient records - no data returned");
       }
     } catch (error) {
-      console.error('Error in saveEdit:', error);
+      console.error("Error in saveEdit:", error);
       setError(`Failed to update patient records: ${error.message}`);
     } finally {
       setEditingField(null);
-      setEditValue('');
+      setEditValue("");
     }
   };
 
   const cancelEdit = () => {
     setEditingField(null);
-    setEditValue('');
+    setEditValue("");
   };
 
   const addNewPrescription = async () => {
@@ -539,29 +565,31 @@ const DoctorPatientRecordsScreen = () => {
     try {
       const prescription = {
         patientId: patientRecords.patientId,
-        doctorId: 'D001', // Current doctor
-        medicines: [{
-          name: prescriptionData.medicineName,
-          dosage: prescriptionData.dosage,
-          frequency: prescriptionData.frequency,
-          duration: prescriptionData.duration,
-          instructions: prescriptionData.instructions
-        }],
-        notes: `Prescribed by doctor for ${patientRecords.name}`
+        doctorId: "D001", // Current doctor
+        medicines: [
+          {
+            name: prescriptionData.medicineName,
+            dosage: prescriptionData.dosage,
+            frequency: prescriptionData.frequency,
+            duration: prescriptionData.duration,
+            instructions: prescriptionData.instructions,
+          },
+        ],
+        notes: `Prescribed by doctor for ${patientRecords.name}`,
       };
 
       await addPrescription(prescription);
-      alert('Prescription added successfully');
+      alert("Prescription added successfully");
       setShowPrescriptionModal(false);
       setPrescriptionData({
-        medicineName: '',
-        dosage: '',
-        frequency: '',
-        duration: '',
-        instructions: ''
+        medicineName: "",
+        dosage: "",
+        frequency: "",
+        duration: "",
+        instructions: "",
       });
     } catch (error) {
-      setError('Failed to add prescription');
+      setError("Failed to add prescription");
     }
   };
 
@@ -581,17 +609,22 @@ const DoctorPatientRecordsScreen = () => {
               placeholder="Enter Patient ID (e.g., P001)"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              onKeyPress={(e) => e.key === "Enter" && handleSearch()}
             />
           </SearchInputContainer>
-          
+
           <SearchButtons>
             <SearchButton onClick={handleSearch} disabled={loading}>
-              {loading ? '⏳ Searching...' : '🔍 Search'}
+              {loading ? (
+                <div className="flex items-center">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                  Searching...
+                </div>
+              ) : (
+                "🔍 Search"
+              )}
             </SearchButton>
-            <ClearButton onClick={clearSearch}>
-              ✕ Clear
-            </ClearButton>
+            <ClearButton onClick={clearSearch}>✕ Clear</ClearButton>
           </SearchButtons>
         </SearchContainer>
 
@@ -600,8 +633,14 @@ const DoctorPatientRecordsScreen = () => {
         {loading && (
           <LoadingContainer>
             <div>
-              <div style={{ fontSize: '24px', color: '#2E7D32' }}>⏳</div>
-              <p style={{ marginTop: '10px', fontSize: '16px', color: '#666666' }}>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
+              <p
+                style={{
+                  marginTop: "10px",
+                  fontSize: "16px",
+                  color: "#666666",
+                }}
+              >
                 Loading patient records...
               </p>
             </div>
@@ -665,11 +704,18 @@ const DoctorPatientRecordsScreen = () => {
             <SectionCard>
               <SectionHeader>
                 <SectionTitle>🏥 Medical History</SectionTitle>
-                <EditButton onClick={() => startEditing('medicalHistory', patientRecords.medicalHistory)}>
+                <EditButton
+                  onClick={() =>
+                    startEditing(
+                      "medicalHistory",
+                      patientRecords.medicalHistory,
+                    )
+                  }
+                >
                   ✏️ Edit
                 </EditButton>
               </SectionHeader>
-              {editingField === 'medicalHistory' ? (
+              {editingField === "medicalHistory" ? (
                 <EditContainer>
                   <EditInput
                     value={editValue}
@@ -698,11 +744,15 @@ const DoctorPatientRecordsScreen = () => {
             <SectionCard>
               <SectionHeader>
                 <SectionTitle>⚠️ Allergies</SectionTitle>
-                <EditButton onClick={() => startEditing('allergies', patientRecords.allergies)}>
+                <EditButton
+                  onClick={() =>
+                    startEditing("allergies", patientRecords.allergies)
+                  }
+                >
                   ✏️ Edit
                 </EditButton>
               </SectionHeader>
-              {editingField === 'allergies' ? (
+              {editingField === "allergies" ? (
                 <EditContainer>
                   <EditInput
                     value={editValue}
@@ -719,7 +769,10 @@ const DoctorPatientRecordsScreen = () => {
                 <>
                   {patientRecords.allergies.length > 0 ? (
                     patientRecords.allergies.map((allergy, index) => (
-                      <ListItem key={index} style={{ color: '#F44336', fontWeight: '600' }}>
+                      <ListItem
+                        key={index}
+                        style={{ color: "#F44336", fontWeight: "600" }}
+                      >
                         • {allergy}
                       </ListItem>
                     ))
@@ -733,11 +786,18 @@ const DoctorPatientRecordsScreen = () => {
             <SectionCard>
               <SectionHeader>
                 <SectionTitle>💊 Current Medications</SectionTitle>
-                <EditButton onClick={() => startEditing('currentMedications', patientRecords.currentMedications)}>
+                <EditButton
+                  onClick={() =>
+                    startEditing(
+                      "currentMedications",
+                      patientRecords.currentMedications,
+                    )
+                  }
+                >
                   ✏️ Edit
                 </EditButton>
               </SectionHeader>
-              {editingField === 'currentMedications' ? (
+              {editingField === "currentMedications" ? (
                 <EditContainer>
                   <EditInput
                     value={editValue}
@@ -753,9 +813,11 @@ const DoctorPatientRecordsScreen = () => {
               ) : (
                 <>
                   {patientRecords.currentMedications.length > 0 ? (
-                    patientRecords.currentMedications.map((medication, index) => (
-                      <ListItem key={index}>• {medication}</ListItem>
-                    ))
+                    patientRecords.currentMedications.map(
+                      (medication, index) => (
+                        <ListItem key={index}>• {medication}</ListItem>
+                      ),
+                    )
                   ) : (
                     <InfoValue>No current medications</InfoValue>
                   )}
@@ -779,66 +841,88 @@ const DoctorPatientRecordsScreen = () => {
 
             <SectionCard>
               <SectionTitle>💊 Prescription Management</SectionTitle>
-              <PrescriptionButton onClick={() => setShowPrescriptionModal(true)}>
+              <PrescriptionButton
+                onClick={() => setShowPrescriptionModal(true)}
+              >
                 ➕ Add New Prescription
               </PrescriptionButton>
             </SectionCard>
           </RecordsContainer>
         )}
 
-        <DemoContainer>
-          <DemoTitle>Demo Patient IDs:</DemoTitle>
-          <DemoText>P001 - Rajesh Kumar</DemoText>
-          <DemoText>P002 - Priya Sharma</DemoText>
-          <DemoText>P003 - Amit Singh</DemoText>
-        </DemoContainer>
-
         {/* Prescription Modal */}
         {showPrescriptionModal && (
           <ModalOverlay onClick={() => setShowPrescriptionModal(false)}>
             <ModalContent onClick={(e) => e.stopPropagation()}>
               <ModalTitle>Add New Prescription</ModalTitle>
-              
+
               <ModalInput
                 type="text"
                 placeholder="Medicine Name"
                 value={prescriptionData.medicineName}
-                onChange={(e) => setPrescriptionData({...prescriptionData, medicineName: e.target.value})}
+                onChange={(e) =>
+                  setPrescriptionData({
+                    ...prescriptionData,
+                    medicineName: e.target.value,
+                  })
+                }
               />
-              
+
               <ModalInput
                 type="text"
                 placeholder="Dosage (e.g., 500mg)"
                 value={prescriptionData.dosage}
-                onChange={(e) => setPrescriptionData({...prescriptionData, dosage: e.target.value})}
+                onChange={(e) =>
+                  setPrescriptionData({
+                    ...prescriptionData,
+                    dosage: e.target.value,
+                  })
+                }
               />
-              
+
               <ModalInput
                 type="text"
                 placeholder="Frequency (e.g., Twice daily)"
                 value={prescriptionData.frequency}
-                onChange={(e) => setPrescriptionData({...prescriptionData, frequency: e.target.value})}
+                onChange={(e) =>
+                  setPrescriptionData({
+                    ...prescriptionData,
+                    frequency: e.target.value,
+                  })
+                }
               />
-              
+
               <ModalInput
                 type="text"
                 placeholder="Duration (e.g., 7 days)"
                 value={prescriptionData.duration}
-                onChange={(e) => setPrescriptionData({...prescriptionData, duration: e.target.value})}
+                onChange={(e) =>
+                  setPrescriptionData({
+                    ...prescriptionData,
+                    duration: e.target.value,
+                  })
+                }
               />
-              
+
               <ModalTextArea
                 placeholder="Instructions (e.g., Take with food)"
                 value={prescriptionData.instructions}
-                onChange={(e) => setPrescriptionData({...prescriptionData, instructions: e.target.value})}
+                onChange={(e) =>
+                  setPrescriptionData({
+                    ...prescriptionData,
+                    instructions: e.target.value,
+                  })
+                }
                 rows={3}
               />
-              
+
               <ModalButtons>
                 <ModalSaveButton onClick={addNewPrescription}>
                   Add Prescription
                 </ModalSaveButton>
-                <ModalCancelButton onClick={() => setShowPrescriptionModal(false)}>
+                <ModalCancelButton
+                  onClick={() => setShowPrescriptionModal(false)}
+                >
                   Cancel
                 </ModalCancelButton>
               </ModalButtons>

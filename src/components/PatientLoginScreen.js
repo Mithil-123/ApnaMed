@@ -288,17 +288,6 @@ const PatientLoginScreen = () => {
           <FaSignInAlt />
           {isLoading ? "Logging in..." : "Login"}
         </LoginButton>
-
-        <HelpText>
-          <HelpTitle>Demo Patient IDs:</HelpTitle>
-          <HelpList>
-            <HelpItem>P001 - Rajesh Kumar</HelpItem>
-            <HelpItem>P002 - Priya Sharma</HelpItem>
-            <HelpItem>P003 - Amit Patel</HelpItem>
-            <HelpItem>P004 - Sunita Singh</HelpItem>
-            <HelpItem>P005 - Vikram Gupta</HelpItem>
-          </HelpList>
-        </HelpText>
       </LoginCard>
     </Container>
   );

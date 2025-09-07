@@ -848,9 +848,9 @@ I'm your AI medical assistant, ready to analyze your symptoms using advanced off
 
                       {message.offlineData.emergencyAlert && (
                         <PredictionCard confidence={100}>
-                          <PredictionTitle style={{ color: "#f44336" }}>
-                            🚨 Emergency Alert
-                          </PredictionTitle>
+                          <PredictionTitle
+                            style={{ color: "#f44336" }}
+                          ></PredictionTitle>
                           <PredictionDescription
                             style={{ color: "#f44336", fontWeight: "bold" }}
                           >
@@ -899,7 +899,7 @@ I'm your AI medical assistant, ready to analyze your symptoms using advanced off
 
         {isLoading && (
           <LoadingContainer>
-            <div style={{ fontSize: "16px", color: "#1976D2" }}>⏳</div>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mx-auto"></div>
             <LoadingText>
               {useOfflineMode
                 ? "Running comprehensive medical analysis..."

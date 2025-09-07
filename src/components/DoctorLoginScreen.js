@@ -167,7 +167,7 @@ const DoctorLoginScreen = () => {
       // Mock doctor authentication - check if doctor ID exists
       const validDoctorIds = mockDoctors.map((doctor) => doctor.id);
       const doctor = mockDoctors.find(
-        (d) => d.id === doctorId.trim().toUpperCase()
+        (d) => d.id === doctorId.trim().toUpperCase(),
       );
 
       if (doctor && password.trim().length > 0) {
@@ -184,7 +184,7 @@ const DoctorLoginScreen = () => {
         navigate("/doctor/dashboard");
       } else {
         setError(
-          "Invalid Doctor ID or Password. Please check your credentials."
+          "Invalid Doctor ID or Password. Please check your credentials.",
         );
       }
     } catch (error) {
@@ -234,14 +234,6 @@ const DoctorLoginScreen = () => {
               {isLoading ? "Logging in..." : "Login"}
             </LoginButton>
           </form>
-
-          <DemoContainer>
-            <DemoTitle>Demo Doctor IDs:</DemoTitle>
-            <DemoText>D001 - Dr. Anjali Patel (General Medicine)</DemoText>
-            <DemoText>D002 - Dr. Rajesh Verma (Cardiology)</DemoText>
-            <DemoText>D003 - Dr. Sunita Reddy (Pediatrics)</DemoText>
-            <DemoText>Password: Any password (demo mode)</DemoText>
-          </DemoContainer>
         </FormCard>
       </FormContainer>
     </Container>

@@ -398,9 +398,8 @@ const PatientPrescriptionsScreen = () => {
     try {
       setLoadingPharmacies(true);
       setSelectedMedicine(medicineName);
-      const availablePharmacies = await findPharmaciesWithMedicine(
-        medicineName
-      );
+      const availablePharmacies =
+        await findPharmaciesWithMedicine(medicineName);
       setPharmacies(availablePharmacies);
     } catch (error) {
       console.error("Failed to find pharmacies:", error);
@@ -423,7 +422,7 @@ const PatientPrescriptionsScreen = () => {
         </Header>
         <LoadingContainer>
           <div>
-            <div style={{ fontSize: "24px", color: "#1976D2" }}>⏳</div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
             <p
               style={{ marginTop: "10px", fontSize: "16px", color: "#666666" }}
             >
@@ -531,7 +530,7 @@ const PatientPrescriptionsScreen = () => {
             {loadingPharmacies ? (
               <LoadingContainer>
                 <div>
-                  <div style={{ fontSize: "20px", color: "#1976D2" }}>⏳</div>
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mx-auto"></div>
                   <p
                     style={{
                       marginTop: "10px",

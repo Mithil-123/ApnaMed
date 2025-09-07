@@ -5,6 +5,154 @@
  * In a real application, these would be replaced with actual API calls to a backend service.
  */
 
+// Disease surveillance data - monthly infection rates
+export const diseaseData = {
+  Jan: {
+    Dengue: 0.009,
+    Malaria: 0.02,
+    "Diarrheal Diseases": 0.027,
+    Typhoid: 0.013,
+    "Skin Infections": 0.019,
+    Hypertension: 0.055,
+    "Respiratory Illness": 0.071,
+    Cancer: 0.002,
+  },
+  Feb: {
+    Dengue: 0.011,
+    Malaria: 0.016,
+    "Diarrheal Diseases": 0.025,
+    Typhoid: 0.009,
+    "Skin Infections": 0.024,
+    Hypertension: 0.049,
+    "Respiratory Illness": 0.084,
+    Cancer: 0.003,
+  },
+  Mar: {
+    Dengue: 0.011,
+    Malaria: 0.017,
+    "Diarrheal Diseases": 0.03,
+    Typhoid: 0.012,
+    "Skin Infections": 0.021,
+    Hypertension: 0.059,
+    "Respiratory Illness": 0.041,
+    Cancer: 0.002,
+  },
+  Apr: {
+    Dengue: 0.018,
+    Malaria: 0.028,
+    "Diarrheal Diseases": 0.03,
+    Typhoid: 0.019,
+    "Skin Infections": 0.036,
+    Hypertension: 0.055,
+    "Respiratory Illness": 0.033,
+    Cancer: 0.002,
+  },
+  May: {
+    Dengue: 0.014,
+    Malaria: 0.03,
+    "Diarrheal Diseases": 0.032,
+    Typhoid: 0.014,
+    "Skin Infections": 0.038,
+    Hypertension: 0.062,
+    "Respiratory Illness": 0.039,
+    Cancer: 0.003,
+  },
+  Jun: {
+    Dengue: 0.017,
+    Malaria: 0.02,
+    "Diarrheal Diseases": 0.054,
+    Typhoid: 0.014,
+    "Skin Infections": 0.036,
+    Hypertension: 0.057,
+    "Respiratory Illness": 0.033,
+    Cancer: 0.002,
+  },
+  Jul: {
+    Dengue: 0.041,
+    Malaria: 0.052,
+    "Diarrheal Diseases": 0.054,
+    Typhoid: 0.028,
+    "Skin Infections": 0.02,
+    Hypertension: 0.061,
+    "Respiratory Illness": 0.032,
+    Cancer: 0.003,
+  },
+  Aug: {
+    Dengue: 0.043,
+    Malaria: 0.052,
+    "Diarrheal Diseases": 0.059,
+    Typhoid: 0.028,
+    "Skin Infections": 0.023,
+    Hypertension: 0.058,
+    "Respiratory Illness": 0.035,
+    Cancer: 0.002,
+  },
+  Sep: {
+    Dengue: 0.034,
+    Malaria: 0.059,
+    "Diarrheal Diseases": 0.032,
+    Typhoid: 0.031,
+    "Skin Infections": 0.024,
+    Hypertension: 0.059,
+    "Respiratory Illness": 0.034,
+    Cancer: 0.003,
+  },
+  Oct: {
+    Dengue: 0.02,
+    Malaria: 0.019,
+    "Diarrheal Diseases": 0.03,
+    Typhoid: 0.015,
+    "Skin Infections": 0.021,
+    Hypertension: 0.071,
+    "Respiratory Illness": 0.039,
+    Cancer: 0.003,
+  },
+  Nov: {
+    Dengue: 0.015,
+    Malaria: 0.025,
+    "Diarrheal Diseases": 0.028,
+    Typhoid: 0.015,
+    "Skin Infections": 0.019,
+    Hypertension: 0.055,
+    "Respiratory Illness": 0.045,
+    Cancer: 0.003,
+  },
+  Dec: {
+    Dengue: 0.02,
+    Malaria: 0.028,
+    "Diarrheal Diseases": 0.021,
+    Typhoid: 0.014,
+    "Skin Infections": 0.02,
+    Hypertension: 0.068,
+    "Respiratory Illness": 0.085,
+    Cancer: 0.003,
+  },
+};
+
+// Current disease surveillance data (simulated real-time data for September 2024)
+export const currentDiseaseData = {
+  Dengue: 0.03, // Normal range (Sep historical: 0.034)
+  Malaria: 0.095, // EMERGENCY: Significantly elevated from Sep historical (0.059)
+  "Diarrheal Diseases": 0.031, // Normal range (Sep historical: 0.032)
+  Typhoid: 0.028, // Normal range (Sep historical: 0.031)
+  "Skin Infections": 0.022, // Normal range (Sep historical: 0.024)
+  Hypertension: 0.056, // Normal range (Sep historical: 0.059)
+  "Respiratory Illness": 0.032, // Normal range (Sep historical: 0.034)
+  Cancer: 0.003, // Normal range (Sep historical: 0.003)
+};
+
+// Warning thresholds (percentage above average)
+export const warningThresholds = {
+  Dengue: 0.5, // 50% above average
+  Malaria: 0.5,
+  "Diarrheal Diseases": 0.4,
+  Typhoid: 0.6,
+  "Skin Infections": 0.45,
+  Hypertension: 0.3,
+  "Respiratory Illness": 0.35,
+  Cancer: 0.75,
+};
+
 // Mock patient data
 export const mockPatients = [
   {
@@ -19,6 +167,7 @@ export const mockPatients = [
     medicalHistory: ["Diabetes", "Hypertension"],
     allergies: ["Penicillin"],
     currentMedications: ["Metformin", "Lisinopril"],
+    diagnosis: "Respiratory Illness",
   },
   {
     id: "P002",
@@ -32,6 +181,7 @@ export const mockPatients = [
     medicalHistory: ["Migraine"],
     allergies: ["None"],
     currentMedications: ["Ibuprofen"],
+    diagnosis: "Hypertension",
   },
   {
     id: "P003",
@@ -45,6 +195,105 @@ export const mockPatients = [
     medicalHistory: ["None"],
     allergies: ["Aspirin"],
     currentMedications: ["None"],
+    diagnosis: "Dengue",
+  },
+  {
+    id: "P004",
+    name: "Sunita Devi",
+    age: 38,
+    gender: "Female",
+    avatar: "👩",
+    symptoms: "Stomach pain, diarrhea",
+    priority: "Medium",
+    waitingTime: "8 mins",
+    medicalHistory: ["None"],
+    allergies: ["None"],
+    currentMedications: ["ORS"],
+    diagnosis: "Diarrheal Diseases",
+  },
+  {
+    id: "P005",
+    name: "Vikram Joshi",
+    age: 52,
+    gender: "Male",
+    avatar: "👨",
+    symptoms: "High fever, body ache",
+    priority: "High",
+    waitingTime: "3 mins",
+    medicalHistory: ["Arthritis"],
+    allergies: ["Sulfa drugs"],
+    currentMedications: ["Paracetamol"],
+    diagnosis: "Malaria",
+  },
+  {
+    id: "P006",
+    name: "Meera Patel",
+    age: 29,
+    gender: "Female",
+    avatar: "👩",
+    symptoms: "Skin rash, itching",
+    priority: "Low",
+    waitingTime: "15 mins",
+    medicalHistory: ["Eczema"],
+    allergies: ["Latex"],
+    currentMedications: ["Antihistamine"],
+    diagnosis: "Skin Infections",
+  },
+  {
+    id: "P007",
+    name: "Arun Kumar",
+    age: 41,
+    gender: "Male",
+    avatar: "👨",
+    symptoms: "Fever, abdominal pain",
+    priority: "Medium",
+    waitingTime: "12 mins",
+    medicalHistory: ["None"],
+    allergies: ["None"],
+    currentMedications: ["Paracetamol"],
+    diagnosis: "Typhoid",
+  },
+  {
+    id: "P008",
+    name: "Kavita Singh",
+    age: 35,
+    gender: "Female",
+    avatar: "👩",
+    symptoms: "Fever, joint pain",
+    priority: "High",
+    waitingTime: "4 mins",
+    medicalHistory: ["None"],
+    allergies: ["Penicillin"],
+    currentMedications: ["Ibuprofen"],
+    diagnosis: "Dengue",
+  },
+  {
+    id: "P009",
+    name: "Ramesh Gupta",
+    age: 48,
+    gender: "Male",
+    avatar: "👨",
+    symptoms: "Persistent cough, fatigue",
+    priority: "Medium",
+    waitingTime: "7 mins",
+    medicalHistory: ["Smoking history"],
+    allergies: ["None"],
+    currentMedications: ["Cough syrup"],
+    diagnosis: "Respiratory Illness",
+  },
+  {
+    id: "P010",
+    name: "Anjali Reddy",
+    age: 26,
+    gender: "Female",
+    avatar: "👩",
+    symptoms: "Nausea, fever",
+    priority: "Medium",
+    waitingTime: "9 mins",
+    medicalHistory: ["None"],
+    allergies: ["None"],
+    currentMedications: ["Anti-nausea medication"],
+    diagnosis: "Malaria",
   },
 ];
 
@@ -222,7 +471,7 @@ export const mockHealthRecords = {
         date: "2024-01-15",
         doctor: "Dr. Anjali Patel",
         reason: "Fever and cough",
-        diagnosis: "Upper respiratory infection",
+        diagnosis: "Respiratory Illness",
       },
       {
         date: "2024-01-01",
@@ -255,7 +504,7 @@ export const mockHealthRecords = {
         date: "2024-01-14",
         doctor: "Dr. Anjali Patel",
         reason: "Headache and nausea",
-        diagnosis: "Migraine episode",
+        diagnosis: "Hypertension",
       },
     ],
   },
@@ -282,7 +531,196 @@ export const mockHealthRecords = {
         date: "2024-01-13",
         doctor: "Dr. Rajesh Verma",
         reason: "Chest pain",
-        diagnosis: "Muscle strain - no cardiac issues",
+        diagnosis: "Dengue",
+      },
+    ],
+  },
+  P004: {
+    patientId: "P004",
+    name: "Sunita Devi",
+    age: 38,
+    gender: "Female",
+    bloodGroup: "AB+",
+    height: "160 cm",
+    weight: "65 kg",
+    bmi: "25.4",
+    vitalSigns: {
+      bloodPressure: "130/85",
+      heartRate: "78 bpm",
+      temperature: "99.2°F",
+      lastUpdated: "2024-01-16",
+    },
+    medicalHistory: ["None"],
+    allergies: ["None"],
+    currentMedications: ["ORS"],
+    recentVisits: [
+      {
+        date: "2024-01-16",
+        doctor: "Dr. Anjali Patel",
+        reason: "Stomach pain and diarrhea",
+        diagnosis: "Diarrheal Diseases",
+      },
+    ],
+  },
+  P005: {
+    patientId: "P005",
+    name: "Vikram Joshi",
+    age: 52,
+    gender: "Male",
+    bloodGroup: "O-",
+    height: "168 cm",
+    weight: "80 kg",
+    bmi: "28.3",
+    vitalSigns: {
+      bloodPressure: "150/95",
+      heartRate: "90 bpm",
+      temperature: "101.4°F",
+      lastUpdated: "2024-01-16",
+    },
+    medicalHistory: ["Arthritis"],
+    allergies: ["Sulfa drugs"],
+    currentMedications: ["Paracetamol"],
+    recentVisits: [
+      {
+        date: "2024-01-16",
+        doctor: "Dr. Rajesh Verma",
+        reason: "High fever and body ache",
+        diagnosis: "Malaria",
+      },
+    ],
+  },
+  P006: {
+    patientId: "P006",
+    name: "Meera Patel",
+    age: 29,
+    gender: "Female",
+    bloodGroup: "A-",
+    height: "162 cm",
+    weight: "55 kg",
+    bmi: "21.0",
+    vitalSigns: {
+      bloodPressure: "115/75",
+      heartRate: "70 bpm",
+      temperature: "98.8°F",
+      lastUpdated: "2024-01-15",
+    },
+    medicalHistory: ["Eczema"],
+    allergies: ["Latex"],
+    currentMedications: ["Antihistamine"],
+    recentVisits: [
+      {
+        date: "2024-01-15",
+        doctor: "Dr. Maria Fernandez",
+        reason: "Skin rash and itching",
+        diagnosis: "Skin Infections",
+      },
+    ],
+  },
+  P007: {
+    patientId: "P007",
+    name: "Arun Kumar",
+    age: 41,
+    gender: "Male",
+    bloodGroup: "B-",
+    height: "172 cm",
+    weight: "78 kg",
+    bmi: "26.4",
+    vitalSigns: {
+      bloodPressure: "135/88",
+      heartRate: "82 bpm",
+      temperature: "100.6°F",
+      lastUpdated: "2024-01-16",
+    },
+    medicalHistory: ["None"],
+    allergies: ["None"],
+    currentMedications: ["Paracetamol"],
+    recentVisits: [
+      {
+        date: "2024-01-16",
+        doctor: "Dr. Anjali Patel",
+        reason: "Fever and abdominal pain",
+        diagnosis: "Typhoid",
+      },
+    ],
+  },
+  P008: {
+    patientId: "P008",
+    name: "Kavita Singh",
+    age: 35,
+    gender: "Female",
+    bloodGroup: "O+",
+    height: "158 cm",
+    weight: "62 kg",
+    bmi: "24.8",
+    vitalSigns: {
+      bloodPressure: "125/82",
+      heartRate: "88 bpm",
+      temperature: "102.1°F",
+      lastUpdated: "2024-01-16",
+    },
+    medicalHistory: ["None"],
+    allergies: ["Penicillin"],
+    currentMedications: ["Ibuprofen"],
+    recentVisits: [
+      {
+        date: "2024-01-16",
+        doctor: "Dr. Rajesh Verma",
+        reason: "Fever and joint pain",
+        diagnosis: "Dengue",
+      },
+    ],
+  },
+  P009: {
+    patientId: "P009",
+    name: "Ramesh Gupta",
+    age: 48,
+    gender: "Male",
+    bloodGroup: "AB-",
+    height: "174 cm",
+    weight: "85 kg",
+    bmi: "28.1",
+    vitalSigns: {
+      bloodPressure: "145/92",
+      heartRate: "86 bpm",
+      temperature: "99.8°F",
+      lastUpdated: "2024-01-15",
+    },
+    medicalHistory: ["Smoking history"],
+    allergies: ["None"],
+    currentMedications: ["Cough syrup"],
+    recentVisits: [
+      {
+        date: "2024-01-15",
+        doctor: "Dr. Sunita Reddy",
+        reason: "Persistent cough and fatigue",
+        diagnosis: "Respiratory Illness",
+      },
+    ],
+  },
+  P010: {
+    patientId: "P010",
+    name: "Anjali Reddy",
+    age: 26,
+    gender: "Female",
+    bloodGroup: "A+",
+    height: "164 cm",
+    weight: "58 kg",
+    bmi: "21.6",
+    vitalSigns: {
+      bloodPressure: "118/76",
+      heartRate: "74 bpm",
+      temperature: "100.9°F",
+      lastUpdated: "2024-01-16",
+    },
+    medicalHistory: ["None"],
+    allergies: ["None"],
+    currentMedications: ["Anti-nausea medication"],
+    recentVisits: [
+      {
+        date: "2024-01-16",
+        doctor: "Dr. Anjali Patel",
+        reason: "Nausea and fever",
+        diagnosis: "Malaria",
       },
     ],
   },
@@ -406,4 +844,100 @@ export const updatePatientRecords = async (patientId, updates) => {
     console.log("Available patient IDs:", Object.keys(mockHealthRecords));
     return null;
   }
+};
+
+/**
+ * Calculate disease averages from historical data
+ * @returns {Object} Average infection rates by disease
+ */
+export const calculateDiseaseAverages = () => {
+  const diseases = Object.keys(diseaseData.Jan);
+  const months = Object.keys(diseaseData);
+  const averages = {};
+
+  diseases.forEach((disease) => {
+    let total = 0;
+    months.forEach((month) => {
+      total += diseaseData[month][disease];
+    });
+    averages[disease] = total / months.length;
+  });
+
+  return averages;
+};
+
+/**
+ * Check for disease warnings based on current vs historical data
+ * @returns {Promise<Array>} Array of warnings for diseases above threshold
+ */
+export const checkDiseaseWarnings = async () => {
+  await simulateDelay(300);
+
+  const averages = calculateDiseaseAverages();
+  const warnings = [];
+
+  Object.keys(currentDiseaseData).forEach((disease) => {
+    const currentRate = currentDiseaseData[disease];
+    const averageRate = averages[disease];
+    const threshold = warningThresholds[disease];
+
+    const increasePercentage = (currentRate - averageRate) / averageRate;
+
+    if (increasePercentage > threshold) {
+      warnings.push({
+        disease,
+        currentRate,
+        averageRate,
+        increasePercentage: (increasePercentage * 100).toFixed(1),
+        severity:
+          increasePercentage > 0.75
+            ? "High"
+            : increasePercentage > 0.5
+              ? "Medium"
+              : "Low",
+        timestamp: new Date().toISOString(),
+      });
+    }
+  });
+
+  return warnings;
+};
+
+/**
+ * Get disease surveillance data
+ * @returns {Promise<Object>} Disease surveillance data with current and historical rates
+ */
+export const getDiseaseData = async () => {
+  await simulateDelay(400);
+
+  const averages = calculateDiseaseAverages();
+
+  return {
+    historical: diseaseData,
+    current: currentDiseaseData,
+    averages,
+    thresholds: warningThresholds,
+  };
+};
+
+/**
+ * Get patient count by disease from current patients
+ * @returns {Object} Count of patients by disease
+ */
+export const getPatientCountByDisease = () => {
+  const counts = {};
+
+  // Initialize counts
+  Object.keys(currentDiseaseData).forEach((disease) => {
+    counts[disease] = 0;
+  });
+
+  // Count patients by diagnosis
+  mockPatients.forEach((patient) => {
+    if (patient.diagnosis && counts.hasOwnProperty(patient.diagnosis)) {
+      counts[patient.diagnosis]++;
+    }
+  });
+
+  return counts;
 };
